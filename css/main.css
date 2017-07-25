@@ -1,0 +1,9 @@
+.container-small
+{
+  max-width: 500px;
+}
+
+form
+{
+  background: #ddd;
+}
