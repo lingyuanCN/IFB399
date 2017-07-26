@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Breathe Deeply</title>
-  <link rel="stylesheet" href="./css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/main.css">
+
 </head>
 <body>
   <div class="navbar navbar-default">
@@ -25,36 +26,28 @@
       </ul>
     </div>
   </div>
-  <form class="container container-small" action="register.php" method="post">
-    <div class="form-group">
-      <label for="">First Name</label>
-      <input id="firstname" class="form-control" type="text" name="firstname" value="">
-      <div class="input-error"></div>
-    </div>
-    <div class="form-group">
-      <label for="">Last Name</label>
-      <input id="lastname" class="form-control" type="text" name="lastname" value="">
-      <div class="input-error"></div>
-    </div>
-    <div class="form-group">
-      <label for="">Email</label>
-      <input id="email" class="form-control" type="text" name="email" value="">
-      <div class="input-error"></div>
-    </div>
-    <div class="form-group">
-      <label for="">password</label>
-      <input id="password" class="form-control" type="text" name="password" value="">
-      <div class="input-error"></div>
-    </div>
-    <div class="form-group">
-      <label for="">confirm</label>
-      <input class="form-control" type="text" name="confirm" value="">
-      <div class="input-error"></div>
-    </div>
-    <p>
+  <div id="register" class="form container container-small">
+    <h1>Sign up</h1>
+    <form id="register-form" class="form-horizontal" action="register.php" method="post">
+      <div class="form-group">
+        <input id="firstname" class="form-control required" type="text" name="firstname" value="" placeholder="First Name">
+      </div>
+      <div class="form-group">
+        <input id="lastname" class="form-control" type="text" name="lastname" value="" placeholder="Last Name">
+      </div>
+      <div class="form-group">
+        <input id="email" class="form-control" type="text" name="email" value="" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <input id="password" class="form-control" type="password" name="password" value="" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <input id="confirm_password" class="form-control" type="password" name="confirm_password" value="" placeholder="Confirm Password">
+      </div>
       <input class="btn btn-primary" type="submit" name="btn-submit" value="submit">
-    </p>
-  </form>
+    </form>
+
+  </div>
   <?php
   if(isset($_POST['btn-submit']))
   {
@@ -68,22 +61,23 @@
 
 
     //连接数据库
-    $link = @mysqli_connect('localhost','root','') or exit ('link failed');
+    $link = mysqli_connect('localhost','root','') or exit ('link failed');
     //设置字符编码
-    @mysqli_query($link, 'set name utf8');
+    mysqli_query($link, 'set name utf8');
     //选择数据库
-    @mysqli_select_db($link, 'data') or exit ('fail to select database');
+    mysqli_select_db($link, 'database') or exit ('fail to select database');
     //定义query命令
     $sql="insert into user (userid,email,firstname,lastname,password) values (null,'$email','$firstname','$lastname','$password')";
     //插入注册用户信息
-    @mysqli_query($link, $sql) or exit ('query failed');
+    mysqli_query($link, $sql) or exit ('query failed');
     //关闭连接
-    @mysqli_close($link);
+    mysqli_close($link);
   }
   ?>
 
   </table>
-<script src="./js/jquery.js"></script>
-<script src="./js/main.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="./js/register-validate.js"></script>
 </body>
 </html>
