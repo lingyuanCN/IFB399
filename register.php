@@ -44,36 +44,37 @@
       <div class="form-group">
         <input id="confirm_password" class="form-control" type="password" name="confirm_password" value="" placeholder="Confirm Password">
       </div>
-      <input class="btn btn-primary" type="submit" name="btn-submit" value="submit">
+      <input class="btn btn-primary" type="submit" name="signup" value="Sign up">
     </form>
 
   </div>
-  <?php
-  if(isset($_POST['btn-submit']))
-  {
-    //获取input中用户输入的值
-    $email=$_POST['email'];
-    $firstname=$_POST['firstname'];
-    $lastname=$_POST['lastname'];
-    $password=$_POST['password'];
-    //表单判断
+
+<?php
+if(isset($_POST['signup']))
+{
+  //获取input中用户输入的值
+  $email=$_POST['email'];
+  $firstname=$_POST['firstname'];
+  $lastname=$_POST['lastname'];
+  $password=$_POST['password'];
+  //表单判断
 
 
 
-    //连接数据库
-    $link = mysqli_connect('localhost','root','') or exit ('link failed');
-    //设置字符编码
-    mysqli_query($link, 'set name utf8');
-    //选择数据库
-    mysqli_select_db($link, 'database') or exit ('fail to select database');
-    //定义query命令
-    $sql="insert into user (userid,email,firstname,lastname,password) values (null,'$email','$firstname','$lastname','$password')";
-    //插入注册用户信息
-    mysqli_query($link, $sql) or exit ('query failed');
-    //关闭连接
-    mysqli_close($link);
-  }
-  ?>
+  //连接数据库
+  $link = mysqli_connect('localhost','root','') or exit ('link failed');
+  //设置字符编码
+  mysqli_query($link, 'set name utf8');
+  //选择数据库
+  mysqli_select_db($link, 'database') or exit ('fail to select database');
+  //定义query命令
+  $sql="insert into user (userid,email,firstname,lastname,password) values (null,'$email','$firstname','$lastname','$password')";
+  //插入注册用户信息
+  mysqli_query($link, $sql) or exit ('query failed');
+  //关闭连接
+  mysqli_close($link);
+}
+?>
 
   </table>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>

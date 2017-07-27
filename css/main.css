@@ -1,9 +1,26 @@
+*
+{
+
+}
+
 .container-small
 {
   max-width: 500px;
 }
 
-form
+div .form
 {
   background: #ddd;
+}
+/* .error label和.form-control-feedback的中心对齐 */
+/* 错误信息label绝对定位，前提条件是加了has-feedback类的包裹div已经在bootstrap.css里相对定位了 */
+.error{
+  position: absolute;
+  right: 40px;
+  top: 10px;
+  color: #c33;
+}
+/* 这里用到了element1~element2这一CSS3选择器，选择前面有element1的每个element2元素，比直接选择.form-control-feedback的优先级要高 */
+.has-feedback label.sr-only ~ .form-control-feedback{
+  top: 5px;
 }

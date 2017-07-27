@@ -1,30 +1,13 @@
-//验证注册表单
+//验证登录表单
 $(document).ready(function() {
-    $("#register-form").validate({
+    $("#login-form").validate({
         //debug:true,
         rules: {
-            firstname: {
-                required: true,
-                maxlength: 10,
-                number: false
-            },
-            lastname: {
-                required: true,
-                maxlength: 10,
-                number: false
-            },
             email: {
                 required: true,
-                email: true
             },
             password: {
                 required: true,
-                minlength: 6,
-                maxlength: 16
-            },
-            confirm_password: {
-                required: true,
-                equalTo: "#password"
             }
         },
         errorPlacement: function(error, element) {
