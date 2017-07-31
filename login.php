@@ -59,20 +59,32 @@
 
     //插入注册用户信息
     if ($email && $password){//如果用户名和密码都不为空
-             $sql = "select * from user where email = '$email' and password='$password'";//检测数据库是否有对应的username和password的sql
-             $result = mysqli_query($link, $sql);//执行sql
-             $rows = mysqli_num_rows($result);//返回一个数值
-             if($rows)
-             {//0 false 1 true
-                   echo "success";
-                   exit;
-             }else{
-                echo "failed";
-             }
+       $sql = "select * from user where email = '$email' and password='$password'";//检测数据库是否有对应的username和password的sql
+       $result = mysqli_query($link, $sql);//执行sql
+       $rows = mysqli_num_rows($result);//返回一个数值
+       if($rows)
+       {//0 false 1 true
+         echo "success";
+         $rs = mysqli_fetch_array($result);
+         //set cookie
+         $expire=time()+60*60;
+         setcookie("user", "$rs[username]", $expire);
+         //重定向浏览器
+         header("Location: ./index.php");
+         //确保重定向后，后续代码不会被执行
+         exit;
+       }
+       else
+       {
+          echo "failed";
+          exit;
+       }
 
 
-    }else{//如果用户名或密码有空
-                echo "please enter your email and password to login";
+    }
+    else
+    {//如果用户名或密码有空
+      echo "please enter your email and password to login";
     }
     //关闭连接
     mysqli_close($link);
@@ -82,6 +94,7 @@
 
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script src="./js/login-validate"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./js/form-validate"></script>
 </body>
 </html>

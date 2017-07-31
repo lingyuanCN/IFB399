@@ -1,2 +1,3 @@
-let firstName = $('firstName');
-let submit = $('#btn-submit');
+$(function(){
+  $(".dropdown-toggle").dropdown();
+});

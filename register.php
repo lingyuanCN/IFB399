@@ -30,19 +30,16 @@
     <h1>Sign up</h1>
     <form id="register-form" class="form-horizontal" action="register.php" method="post">
       <div class="form-group">
-        <input id="firstname" class="form-control required" type="text" name="firstname" value="" placeholder="First Name">
+        <input id="username" class="form-control required" type="text" name="username" value="" maxlength="20" placeholder="Username">
       </div>
       <div class="form-group">
-        <input id="lastname" class="form-control" type="text" name="lastname" value="" placeholder="Last Name">
+        <input id="email" class="form-control" type="text" name="email" value="" maxlength="20" placeholder="Email">
       </div>
       <div class="form-group">
-        <input id="email" class="form-control" type="text" name="email" value="" placeholder="Email">
+        <input id="password" class="form-control" type="password" name="password" value="" maxlength="20" placeholder="Password">
       </div>
       <div class="form-group">
-        <input id="password" class="form-control" type="password" name="password" value="" placeholder="Password">
-      </div>
-      <div class="form-group">
-        <input id="confirm_password" class="form-control" type="password" name="confirm_password" value="" placeholder="Confirm Password">
+        <input id="confirm_password" class="form-control" type="password" name="confirm_password" value="" maxlength="20" placeholder="Confirm Password">
       </div>
       <input class="btn btn-primary" type="submit" name="signup" value="Sign up">
     </form>
@@ -54,8 +51,7 @@ if(isset($_POST['signup']))
 {
   //获取input中用户输入的值
   $email=$_POST['email'];
-  $firstname=$_POST['firstname'];
-  $lastname=$_POST['lastname'];
+  $username=$_POST['username'];
   $password=$_POST['password'];
   //表单判断
 
@@ -68,17 +64,19 @@ if(isset($_POST['signup']))
   //选择数据库
   mysqli_select_db($link, 'database') or exit ('fail to select database');
   //定义query命令
-  $sql="insert into user (userid,email,firstname,lastname,password) values (null,'$email','$firstname','$lastname','$password')";
+  $sql="insert into user (userid,email,username,password) values (null,'$email','$username','$password')";
   //插入注册用户信息
   mysqli_query($link, $sql) or exit ('query failed');
   //关闭连接
   mysqli_close($link);
+
 }
 ?>
 
   </table>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script src="./js/register-validate.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./js/form-validate.js"></script>
 </body>
 </html>
